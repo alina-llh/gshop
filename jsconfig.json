@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "src/*"//@联向
+      ] 
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
