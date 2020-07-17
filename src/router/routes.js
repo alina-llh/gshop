@@ -1,7 +1,7 @@
 import Home from "@/pages/Home"
-import Login from '@/pages/Login'
+import Login from "@/pages/Login"
 import Register from "@/pages/Register"
-import Search from '@/pages/Search'
+import Search from "@/pages/Search"
 export default [
   {
     path: "/home",
@@ -16,12 +16,13 @@ export default [
     component: Register
   },
   {
-    path: "/search/:keywrod?",
+    path: "/search/:keyword?",
     component: Search,
     name: "Search",
-    props: route => ({
-      keywrod: route.params.keywrod,
-      keywrod1: route.query.keywrod1
-    })
+    // props: route => ({ keyword: route.params.keyword })
   },
+  {
+    path: "/",
+    redirect: "/home"
+  }
 ]

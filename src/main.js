@@ -1,9 +1,24 @@
-import Vue from "vue"
+import Vue from 'vue'
+import App from './App.vue'
 import router from "@/router"
-import App from '@/App'
+import TypeNav from "@/components/TypeNav"
+import SliderLoop from "@/components/SliderLoop"
+import store from "@/store"
+import '@/mock/mockServer'
+import * as API from '@/api'
+API.reqGoodsList({})
+
+Vue.component('TypeNav', TypeNav)
+Vue.component('SliderLoop', SliderLoop)
 Vue.config.productionTip = false
+
+
 new Vue({
-  el: '#app',
+  el: "#app",
   render: h => h(App),
-  router
+  created () {
+    Vue.prototype.$bus = new Vue()
+  },
+  router,
+  store
 })

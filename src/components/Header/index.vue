@@ -8,9 +8,9 @@
           <p>
             <span>请</span>
             <!-- <a href="###">登录</a> -->
-            <router-link to="/login">登录</router-link>
+            <router-link to="/home">登录</router-link>
             <!-- <a href="###" class="register">免费注册</a> -->
-            <router-link to="/register" class="register">免费注册</router-link>
+            <router-link to="register">免费注册</router-link>
           </p>
         </div>
         <div class="typeList">
@@ -31,13 +31,13 @@
         <!-- <a class="logo" title="尚品汇" href="###" target="_blank">
           <img src="./images/logo.png" alt />
         </a>-->
-        <router-link to="/home" title="尚品汇" target="_blank">
+        <router-link to="/home" class="logo" title="尚品汇">
           <img src="./images/logo.png" alt />
         </router-link>
       </h1>
       <div class="searchArea">
         <form action="###" class="searchForm">
-          <input type="text" id="autocomplete" class="input-error input-xxlarge" v-model="keywrod"/>
+          <input type="text" id="autocomplete" class="input-error input-xxlarge" v-model="keyword" />
           <button class="sui-btn btn-xlarge btn-danger" type="button" @click="toSearch">搜索</button>
         </form>
       </div>
@@ -50,22 +50,28 @@ export default {
   name: 'Header',
   data() {
     return {
-      keywrod:""
+      keyword: ''
     }
+  },
+  mounted() {
+    this.$bus.$on('clearKeyword', this.clearKeyword)
   },
   methods: {
-    toSearch(){
-      this.$router.push({
-        name:'Search',
-        query:{
-          keywrod1:this.keywrod.toUpperCase()
-        },
-        params:{
-          keywrod:this.keywrod||undefined
-        }
-      })
+    toSearch() {
+      let location = {
+        name: 'Search',
+        params: { keyword: this.keyword || undefined }
+      }
+      let { query } = this.$route
+      if (query) {
+        location.query = query
+      }
+      this.$router.push(location)
+    },
+    clearKeyword() {
+      this.keyword = ''
     }
-  },
+  }
 }
 </script>
 
